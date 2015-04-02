@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title><?=name?> - Luvit Quest</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="//fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu+Mono" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="normalize.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="favicon.png">
+</head>
+
+<body>
+  <nav class="menubar">
+    <ul>
+      <li><a target="_blank" href="https://luvit.io/"><img src="/tiny-white.svg" alt="Luvit <3"></a></li>
+      <li><a target="_blank" href="https://luvit.io/docs.html">Docs</a></li>
+      <li><a target="_blank" href="https://luvit.io/install.html">Install</a></li>
+      <li><a target="_blank" href="https://luvit.io/blog/">Blog</a></li>
+    </ul>
+  </nav>
+  <div class="row">
+    <?=markdown(readme)?>
+  </div>
+  <script src="cm/addon/runmode/runmode-standalone.js"></script>
+  <script src="cm/mode/lua/lua.js"></script>
+  <script src="cm/mode/shell/shell.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

@@ -5,7 +5,7 @@ return function (req, res, go)
   for i = 1, #req.headers do
     local key, value = unpack(req.headers[i])
     if key:lower() == "cookie" then
-      for k, v in value:gmatch("([^;=]+)=([^;=]+)") do
+      for k, v in value:gmatch("([^ ;=]+)=([^;=]+)") do
         cookies[k] = v
       end
     end
