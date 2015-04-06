@@ -11,9 +11,13 @@ return function (req, res, go)
     end
   end
   local headers = res.headers
-  function res.setCookie(key, value)
+  function res.setCookie(key, value, props)
     cookies[key] = value
-    headers[#headers + 1] = {"Set-Cookie", key .. "=" .. value}
+    local cookie = key .. "=" .. value
+    for k, v in pairs(props) do
+      cookie = cookie .. "; " .. k .. '=' .. v
+    end
+    headers[#headers + 1] = {"Set-Cookie", cookie}
   end
   return go()
 end

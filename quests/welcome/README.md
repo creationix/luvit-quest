@@ -22,7 +22,7 @@ Your first test is a simple one to make sure you have the hang of this before
 we start teaching you advanced spells or skills.
 
 Your task is to conjure a local HTTP server that will respond to all requests
-with a JSON document containing the HTTP `method` and `url` of the request.
+with a JSON document containing the HTTP `method` and `pathname` of the request.
 
 The following shell will get you started:
 
@@ -62,8 +62,12 @@ The following API interfaces will be helpful in solving this task:
  - `res:writeHead(code, headers)` - Set response head with HTTP status code as
     number and headers as key-value table. Example:
     `res:writeHead(200, {["Content-Type"] = "text/plain"})`
+ - `res:setHeader(key, value)` - Set a single http header.  Head will flush
+    automatically later if needed.
  - `res:finish(value)` - Send the response body as a single chunk and end the
     stream. Example: `res:finish("Hello World\n")`
+ - `json.stringify(value)` - Serialize a value to a JSON string.
+ - `url.parse(url)` - Parse a url to get things like `pathname`.
 
 ## Test It!
 

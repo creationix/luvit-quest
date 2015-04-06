@@ -5,5 +5,6 @@ return {
   dependencies = {
     "creationix/weblit",
     "creationix/hoedown",
+    "creationix/coro-http",
   }
 }

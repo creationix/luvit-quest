@@ -2,7 +2,8 @@ local renderTemplate = require('render-template')
 local pathJoin = require('luvi').path.join
 local fs = require('coro-fs').chroot(pathJoin(module.dir, "quests"))
 
-require('weblit-app')
+local app = require('weblit-app')
+app
   .bind({host="0.0.0.0", port="1337"})
 
   .use(require('session-logger'))
@@ -13,7 +14,7 @@ require('weblit-app')
 
   .use(function (_, res, go)
     function res.teleport(name)
-      res.setCookie(name, res.keygen(name))
+      res.setCookie(name, res.keygen(name), {Path="/"})
       res.code = 302
       res.headers.Location = "/" .. name .. ".html"
     end
@@ -35,20 +36,22 @@ require('weblit-app')
   }, function (req, res, go)
     local name = req.params.name
     local readme = fs.readFile(pathJoin(name, "README.md"))
+
     if not readme then return go() end
-    local key = res.keygen(name)
-    if key ~= req.cookies[name] then
-      res.code = 412
-      res.headers["Content-Type"] = "text/plain"
-      res.body = req.cookies.player .. " has yet to aquire the key to " .. name .. ".\n"
-      return
-    end
+    if not req.validate(name) then return end
     renderTemplate(res, "quest", {
       name = name,
       readme = readme
     })
+    require('./quests/' .. name .. '/form')(req, res)
   end)
 
   .use(require('weblit-static')(pathJoin(module.dir, "static")))
 
   .start()
+
+coroutine.wrap(function ()
+  for entry in fs.scandir(".") do
+    require('./quests/' .. entry.name .. '/route')(app)
+  end
+end)()
