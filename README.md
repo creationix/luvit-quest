@@ -33,7 +33,7 @@ local jsonStringify = require('json').stringify
 local server = http.createServer(function (req, res)
   -- req.method --> the HTTP verb of the request
   -- req.path   --> the request path (including query string, but not domain or protocol)
-  
+
   res:writeHead(404, {['Content-Type'] = 'text/plain'})
   res:finish('Not found\n')
 
@@ -56,3 +56,29 @@ The user will create a local server and run it.  Then in another terminal tab, o
 to grade their submission.  If it passes, they will get an unlock code to the next level.
 
 
+-----
+
+Node-Style:
+
+  TCP C/S
+  HTTP C/S
+  HTTPS C
+
+Coro-Style:
+
+  TCP C/S
+  HTTP C/S
+  Websocket C/S
+  Weblit Server
+
+Remote Control:
+  LuvitBot
+  Limitless LEDs (raffle)
+
+Demo:
+
+  FS
+  Coro-FS
+  Luvi APPs
+  Publishing to Lit
+  Joystick Stream

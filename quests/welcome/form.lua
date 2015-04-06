@@ -2,10 +2,10 @@
 return function (req, res)
   local ip = req.socket:getpeername().ip
   res.body = res.body:gsub("<!%-%-fields%-%->",
-    '<form method="POST" action="/welcome/test">' ..
-      '<input name="host" type="text" value="' .. ip .. '">' ..
-      '<input name="port" type="text" value="8080">' ..
+    '<p><form method="POST" action="/welcome/test">' ..
+      '<label for="host">Host:<input name="host" type="text" value="' .. ip .. '"></label>' ..
+      '<label for="port">Port:<input name="port" type="text" value="8080"></label>' ..
       '<input type="submit" value="Test My Server">' ..
-    '</form>'
+    '</form></p>'
   )
 end
