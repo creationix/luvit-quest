@@ -22,7 +22,7 @@ Your first test is a simple one to make sure you have the hang of this before
 we start teaching you advanced spells or skills.
 
 Your task is to conjure a local HTTP server that will respond to all requests
-with a JSON document containing the HTTP `method` and `path` of the request.
+with a JSON document containing the HTTP `method` and `url` of the request.
 
 The following shell will get you started:
 
@@ -57,7 +57,7 @@ luvit server.lua
 The following API interfaces will be helpful in solving this task:
 
  - `req.method` - contains the HTTP request method as a string like `"GET"`.
- - `req.path` - contains the HTTP request path including query string but not
+ - `req.url` - contains the HTTP request path including query string but not
     domain or protocol.  For example `"/red/mage?spell=magic+missile"`.
  - `res:writeHead(code, headers)` - Set response head with HTTP status code as
     number and headers as key-value table. Example:
