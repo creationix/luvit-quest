@@ -29,9 +29,9 @@ end)()
 
 In this version you'll likely want the following APIs:
 
- - read() - A blocking read that returns the next item in the stream and nil
+ - `read()` - A blocking read that returns the next item in the stream and nil
    when the stream closes.
- - write(item) - A blocking write, pass in null to send EOS.
+ - `write(item)` - A blocking write, pass in null to send EOS.
 
 Hint, you can use `for item in read do ... end` to loop over the stream.
 Don't forget to send EOS after the loop ends.
