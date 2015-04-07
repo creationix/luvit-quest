@@ -27,6 +27,16 @@ coroutine.wrap(function ()
 end)()
 ```
 
+In this version you'll likely want the following APIs:
+
+ - read() - A blocking read that returns the next item in the stream and nil
+   when the stream closes.
+ - write(item) - A blocking write, pass in null to send EOS.
+
+Hint, you can use `for item in read do ... end` to loop over the stream.
+Don't forget to send EOS after the loop ends.
+
+
 ## Node.JS Style
 
 Create a `tcp-server.lua` file for your quest entry.
@@ -38,6 +48,10 @@ createServer(function (socket)
 end):listen(3000, "0.0.0.0")
 print("TCP server running")
 ```
+
+In this version you'll likely want the following APIs:
+
+ - `stream:pipe(targetStream)` - Connect a stream to another stream. (Hint the socket is a duplex stream)
 
 ## Test It!
 
