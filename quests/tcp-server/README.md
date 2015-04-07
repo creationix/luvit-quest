@@ -23,7 +23,7 @@ local createServer = require('coro-tcp').createServer
 createServer("0.0.0.0", 3000, function (read, write)
   -- Insert code here
 end)
-  ```
+```
 
 In this version you'll likely want the following APIs:
 
