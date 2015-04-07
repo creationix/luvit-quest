@@ -1,0 +1,6 @@
+local net = require('net')
+local server = net.createServer(function(sock)
+  sock:pipe(sock)
+end)
+server:listen(8081, '127.0.0.1')
+print('listening on 127.0.0.1:8081')
