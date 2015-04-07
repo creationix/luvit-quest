@@ -5,9 +5,9 @@ local jsonParse = require('json').parse
 return function (app)
   app.route({
     method = "POST",
-    path = "/welcome/test"
+    path = "/http-server/test"
   }, function (req, res)
-    if not req.validate("welcome") then return end
+    if not req.validate("http-server") then return end
     local config = queryParse(req.body)
     local secret = string.format("/%x", math.random(0x100000000))
     local url = string.format("http://%s:%s%s?ignore=me",
@@ -16,7 +16,7 @@ return function (app)
       secret)
 
     local head, body = request("GET", url)
-    local data = jsonParse(body)
+   local data = jsonParse(body)
 
     if not data then
       error("NOT JSON IN RESPONSE")
