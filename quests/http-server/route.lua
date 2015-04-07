@@ -16,7 +16,7 @@ return function (app)
       secret)
 
     local head, body = request("GET", url)
-   local data = jsonParse(body)
+    local data = jsonParse(body)
 
     if not data then
       error("NOT JSON IN RESPONSE")
