@@ -9,7 +9,7 @@ choosing to write an echo TCP/IP server.
 ## Coroutine Style
 
 For Coroutine style, we need a library not included with luvit core.  Let's
-install that using `lit`. tcpechoserver.lua:
+install that using `lit`.
 
 ```sh
 lit install creationix/coro-tcp
@@ -20,12 +20,10 @@ Then create your `tcp-server.lua` file using the following as a starting point.
 ```lua
 local createServer = require('coro-tcp').createServer
 
-coroutine.wrap(function ()
-  createServer("0.0.0.0", 3000, function (read, write)
-    -- Insert code here
-  end)
-end)()
-```
+createServer("0.0.0.0", 3000, function (read, write)
+  -- Insert code here
+end)
+  ```
 
 In this version you'll likely want the following APIs:
 
