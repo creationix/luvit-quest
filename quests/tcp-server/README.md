@@ -14,10 +14,8 @@ package.lua:
 return {
   name = "quests/tcp-server",
   dependencies = {
-    "luvit/require@1.0.1",
-    "luvit/pretty-print@1.0.0",
-    "creationix/coro-tcp@1.0.5",
-    "creationix/coro-wrapper@1.0.0",
+    "creationix/coro-tcp",
+    "creationix/coro-wrapper",
   },
 }
 ```
@@ -48,7 +46,7 @@ package.lua:
 return {
   name = "quests/tcp-server",
   dependencies = {
-    "luvit/luvit@2.0.4"
+    "luvit/luvit"
   },
 }
 ```
