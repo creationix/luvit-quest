@@ -58,27 +58,22 @@ to grade their submission.  If it passes, they will get an unlock code to the ne
 
 -----
 
-Node-Style:
+welcome - install luvit and click link (no test)
+tcp-server - TCP Server (Echo server) coro-tcp and node-style
+tcp-client - TCP Client (HTTP primitive client) coro + node
+http-server - HTTP Server (JSON response with content-type header and method/pathname)
+http-client - HTTP Client (PUT JSON with magic key)
 
-  TCP C/S
-  HTTP C/S
-  HTTPS C
+weblit - Weblit test a few routes
+websocket - Websocket  echo server
 
-Coro-Style:
-
-  TCP C/S
-  HTTP C/S
-  Websocket C/S
-  Weblit Server
-
-Remote Control:
-  LuvitBot
-  Limitless LEDs (raffle)
+luvbot - use gamepad or termbox and control bot over tcp
+limitless - Limitless LEDs (raffle) - use udp to change color
 
 Demo:
 
-  FS
-  Coro-FS
+  FS / Coro-FS
   Luvi APPs
   Publishing to Lit
   Joystick Stream
+  Joystick FS
