@@ -6,61 +6,48 @@ are another option. Coroutines let you write code in a blocking style.
 In this quest, you will have the options of using either method of your
 choosing to write an echo TCP/IP server.
 
-## Coroutines
+## Coroutine Style
 
-package.lua:
+For Coroutine style, we need a library not included with luvit core.  Let's
+install that using `lit`. tcpechoserver.lua:
 
-```lua
-return {
-  name = "quests/tcp-server",
-  dependencies = {
-    "creationix/coro-tcp",
-    "creationix/coro-wrapper",
-  },
-}
+```sh
+lit install creationix/coro-tcp
 ```
 
-*Don't forget to `lit install` your dependencies!*
-
-tcpechoserver.lua:
+Then create your `tcp-server.lua` file using the following as a starting point.
 
 ```lua
-local uv = require('uv')
+local createServer = require('coro-tcp').createServer
+
 coroutine.wrap(function ()
-  -- Insert code here
+  createServer("0.0.0.0", 3000, function (read, write)
+    -- Insert code here
+  end)
 end)()
-uv.run()
 ```
 
-Run your server with:
+## Node.JS Style
 
-```sh
-luvit tcpechoserver.lua
-```
-
-## Callbacks
-
-package.lua:
+Create a `tcp-server.lua` file for your quest entry.
 
 ```lua
-return {
-  name = "quests/tcp-server",
-  dependencies = {
-    "luvit/luvit"
-  },
-}
+local createServer = require('net').createServer
+createServer(function (socket)
+  -- Insert code here
+end):listen(3000, "0.0.0.0")
+print("TCP server running")
 ```
 
-tcpechoserver.lua:
+## Test It!
 
-```lua
-local net = require('net')
-local server = net.createServer...
--- Insert code here
-```
-
-*Don't forget to `lit install` your dependencies!*
+Once you've written your file, run it with `luvit`.
 
 ```sh
-luvit tcpechoserver.lua
+luvit tcp-server.lua
 ```
+
+You can test this locally using telnet or netcat to localhost port 3000.
+
+Enter your port and ip below to test and move to the next challenge.
+

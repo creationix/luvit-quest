@@ -5,7 +5,7 @@ return function (app)
     method = "POST",
     path = "/tcp-server/test"
   }, function (req, res)
-    if not req.validate("welcome") then return end
+    if not req.validate("tcp-server") then return end
     local config = queryParse(req.body)
     local read, write = tcp.connect(config.host, config.port)
     if not read then error(write) end
