@@ -22,7 +22,7 @@ return function (app)
       error("NOT JSON IN RESPONSE")
     end
     if head.code == 200 and data.pathname == secret and data.method == "GET" then
-      return res.teleport("coro")
+      return res.teleport("http-client")
     end
     error("Invalid response data")
   end)

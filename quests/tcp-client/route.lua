@@ -1,23 +1,26 @@
 return function (app)
 
   local clients = {}
+  local page = "tcp-client"
+  local nextPage = "http-server"
 
   app.route({
     method = "GET",
-    path = "/tcp-client/push"
+    path = "/" .. page .. "/push"
   }, function (req, res)
-    if not req.validate("tcp-client") then return end
-    local key = res.keygen("tcp-client")
+    if not req.validate(page) then return end
+    local key = res.keygen(page)
     clients[key] = coroutine.running()
-    print("Long-poll Waiting " .. req.cookies.player)
-    res.body = assert(coroutine.yield())
-    print("Long-poll Done " .. req.cookies.player)
-    res.setCookie("http-server", res.keygen("http-server"), {Path="/"})
+    print("Long-poll " .. page .. " Waiting " .. req.cookies.player)
+    local target = assert(coroutine.yield())
+    print("Long-poll " .. page .. " Done " .. req.cookies.player)
+    res.body = "/" .. target .. ".html"
+    res.setCookie(target, res.keygen(target), {Path="/"})
     res.code = 200
   end)
   app.route({
     method = "GET",
-    path = "/tcp-client/:hash"
+    path = "/" .. page .. "/:hash"
   }, function (req, res)
     local key = req.params.hash
     local thread = clients[key]
@@ -25,6 +28,6 @@ return function (app)
     clients[key] = nil
     res.code = 200
     res.body = "Success!\n"
-    coroutine.resume(thread, "/http-server.html")
+    coroutine.resume(thread, nextPage)
   end)
 end

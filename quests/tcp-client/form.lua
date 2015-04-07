@@ -1,14 +1,12 @@
 
 return function (req, res)
-  local ip = '"' .. req.socket:getsockname().ip .. '"'
-  local port = req.socket:getsockname().port
-  local hash = res.keygen("tcp-client")
-  local line = '"GET /tcp-client/' .. hash .. ' HTTP/1.0\\r\\n\\r\\n"'
+  local name = "tcp-client"
 
   res.body = res.body
-    :gsub("%%LINE", line)
-    :gsub("%%HOST", ip)
-    :gsub("%%PORT", port)
+    :gsub("%%HOST", req.socket:getsockname().ip)
+    :gsub("%%PORT", req.socket:getsockname().port)
+    :gsub("%%HASH", res.keygen(name))
+    :gsub("%%NAME", name)
     :gsub("<!%-%-fields%-%->", [[
     <script>
       window.onload = function () {
@@ -22,7 +20,7 @@ return function (req, res)
             throw xhr.responseText;
           }
         }
-        xhr.open("GET", "/tcp-client/push")
+        xhr.open("GET", "/]] .. name .. [[/push")
         xhr.send()
       };
     </script>

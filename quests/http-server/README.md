@@ -1,58 +1,59 @@
-Welcome to Luvit-Quest.
 
-## Gird Thyself With Proper Attire
-
-Before beginning the quest, you must first install the latest `luvit` and `lit`
-tools into your computer.  The [install][] link at top will take you to the
-official luvit installation instructions.
-
-[install]: https://luvit.io/install.html
-
-Once you have `luvit` and `lit` installed, create a training area (directory)
-so you have a place to work.
-
-```sh
-mkdir quests
-cd quests
-```
-
-## But First a Small Test
-
-Your first test is a simple one to make sure you have the hang of this before
-we start teaching you advanced spells or skills.
-
-Your task is to conjure a local HTTP server that will respond to all requests
+Your task is now to conjure a local HTTP server that will respond to all requests
 with a JSON document containing the HTTP `method` and `pathname` of the request.
 
-The following shell will get you started:
+## Coro Style
 
-```lua
--- Load the node-style HTTP library
-local http = require('http')
--- Load the JSON encoder
-local jsonStringify = require('json').stringify
-
--- Create an HTTP server node-style.
-local server = http.createServer(function (req, res)
-
-  -- Insert code here
-
-end)
-
--- Bind to port 8080 and start listening
-server:listen(8080)
-
--- Print a nice message so you know it got this far
-print("HTTP Server listening at http://localhost:8080")
-```
-
-And then run the server using luvit.
+If using coro style, you'll want something like the `creationix/coro-http` library to help you out.
 
 ```sh
-luvit server.lua
+lit install creationix/coro-http
 ```
 
-## API Hints
+Use the following to get started.  Save it as `http-server.lua`.
+
+```lua
+local createServer = require('coro-http').createServer
+local jsonStringify = require('json').stringify
+local urlParse = require('url').parse
+
+createServer("0.0.0.0", 8080, function (head, body)
+  -- Replace with new head and body
+  return {
+    code = 200,
+    {"Server", "My Server"},
+    {"Content-Type", "text/plain"},
+    {"Content-Length", 12},
+  }, "Hello World\n"
+end)
+```
+
+The `coro-http` library provides a simple blocking interface to `http-codec`.
+
+The `head` tabke for request and response heads has keys like `method`,
+`path`, `code`, etc and numerical indexed headers as table pairs.
+
+ - `head.method` - HTTP method of request
+ - `head.path` -  as table pairs and the code among other values.  Then there are zero or more
+ - `json.stringify(value)` - Serialize a value to a JSON string.
+ - `url.parse(url)` - Parse a url to get things like `pathname`.
+
+
+## Node Style
+
+Use the following to get started.  Save it as `http-server.lua`.
+
+```lua
+local createServer = require('http').createServer
+local jsonStringify = require('json').stringify
+local urlParse = require('url').parse
+
+createServer(function (req, res)
+  -- Insert code here
+end):listen(8080, "0.0.0.0")
+
+print("HTTP Server listening at http://localhost:8080")
+```
 
 The following API interfaces will be helpful in solving this task:
 
@@ -70,6 +71,12 @@ The following API interfaces will be helpful in solving this task:
  - `url.parse(url)` - Parse a url to get things like `pathname`.
 
 ## Test It!
+
+And then run the server using luvit.
+
+```sh
+luvit http-server.lua
+```
 
 Once you have a local server that does what it should, tell the dungeon master
 to check your incantation.  If it passes, you'll be teleported to the next

@@ -6,9 +6,8 @@ make your request to, the following values will be useful:
 
 ```lua
 local config = {
-  host = %HOST,
+  host = "%HOST",
   port = %PORT,
-  line = %LINE,
 }
 ```
 
@@ -26,8 +25,8 @@ Then create your `tcp-client.lua` file using the following as a starting point.
 local connect = require('coro-tcp').connect
 
 coroutine.wrap(function ()
-  local line = %LINE
-  local read, write = connect(%HOST, %PORT)
+  local line = "GET /%NAME/%HASH HTTP/1.0\r\n\r\n"
+  local read, write = connect("%HOST", %PORT)
   -- Insert code here
 end)()
 ```
@@ -49,9 +48,10 @@ With the node style APIs, start with the following `tcp-client.lua` file.
 local connect = require('net').connect
 
 local socket
-socket = connect(%PORT, %HOST, function (err)
+socket = connect(%PORT, "%HOST", function (err)
   assert(not err, err)
-  local line = %LINE
+  local line = "GET /%NAME/%HASH HTTP/1.0\r\n\r\n"
+
   -- Insert code here
 end)
 ```
