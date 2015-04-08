@@ -7,7 +7,7 @@ coroutine.wrap(function ()
     {"Connection", "close"},
     {"Content-Type", "application/json"},
   }
-  local url = "http://127.0.0.1:1337/http-client/ecf8858abee08b3c825d32d7bc76fbd943654a3b"
+  local url = "http://127.0.0.1:1337/http-client/0b9cee3e497008f14d185b97ca1d453b450f7ff7"
   local json = jsonStringify({
     name = "Tim Casewll",
     message = "This is Epic!",

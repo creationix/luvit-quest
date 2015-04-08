@@ -45,6 +45,7 @@ end)()
 
 ```lua
 local request = require('http').request
+local jsonStringify = require('json').stringify
 
 local req
 req = http.request({
@@ -52,5 +53,13 @@ req = http.request({
   port = %PORT,
   method = "PUT",
   path = "/http-client/%HASH",
+  headers = {
+    {"User-Agent", "%PLAYER"}
+  },
 }, function)
+
+local json = "{}" -- Replace with real body
+
+req:write(json)
+req:done()
 ```
