@@ -21,13 +21,17 @@ return function (app)
     res.code = 200
   end)
   app.route({
-    method = "GET",
+    method = "PUT",
     path = "/" .. page .. "/:hash"
   }, function (req, res)
     local key = req.params.hash
     local thread = clients[key]
     if not thread then return end
     clients[key] = nil
+    p(req)
+    if not req.body then
+      error("Missing body")
+    end
     local json = jsonParse(req.body)
     if not json then
       error("Body is not valid JSON")
@@ -35,14 +39,11 @@ return function (app)
     if not (json.name and json.message) then
       error("Missing name or message in json body")
     end
-    if req.method ~= "PUT" then
-      error("Request is not PUT")
-    end
     if req.headers["Content-Type"] ~= "application/json" then
       error("Missing 'Content-Type: application/json' header")
     end
     res.code = 200
-    res.body = "Welcome %PLAYER!\n"
+    res.body = "Welcome " .. req.cookies.player .. "!\n"
     coroutine.resume(thread, nextPage)
   end)
 end

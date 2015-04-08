@@ -31,6 +31,7 @@ local jsonStringify = require('json').stringify
 coroutine.wrap(function ()
   local headers = {
     {"User-Agent", "%PLAYER"},
+    {"Connection", "close"},
     -- Add more headers here
   }
   local url = "http://%HOST:%PORT/http-client/%HASH"
@@ -38,4 +39,18 @@ coroutine.wrap(function ()
   local res, body = request("PUT", url, headers, json)
   p(res, body)
 end)()
+```
+
+## Node Style
+
+```lua
+local request = require('http').request
+
+local req
+req = http.request({
+  host = "%HOST",
+  port = %PORT,
+  method = "PUT",
+  path = "/http-client/%HASH",
+}, function)
 ```
