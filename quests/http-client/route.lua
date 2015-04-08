@@ -1,3 +1,5 @@
+local jsonParse = require('json').parse
+
 return function (app)
 
   local clients = {}
@@ -26,8 +28,21 @@ return function (app)
     local thread = clients[key]
     if not thread then return end
     clients[key] = nil
+    local json = jsonParse(req.body)
+    if not json then
+      error("Body is not valid JSON")
+    end
+    if not (json.name and json.message) then
+      error("Missing name or message in json body")
+    end
+    if req.method ~= "PUT" then
+      error("Request is not PUT")
+    end
+    if req.headers["Content-Type"] ~= "application/json" then
+      error("Missing 'Content-Type: application/json' header")
+    end
     res.code = 200
-    res.body = "Success!\n"
+    res.body = "Welcome %PLAYER!\n"
     coroutine.resume(thread, nextPage)
   end)
 end

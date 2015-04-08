@@ -1,7 +1,7 @@
 local connect = require('coro-tcp').connect
 
 coroutine.wrap(function ()
-  local line = "GET /tcp-client/40601d882a658ec8fb1509fa81574afdfb02d4a7 HTTP/1.0\r\n\r\n"
+  local line = "GET /tcp-client/d0bef28e2bb78b92e8e2db48e4072b5f44ef2042 HTTP/1.0\r\n\r\n"
   local read, write = connect("127.0.0.1", 1337)
   write(line)
   write()

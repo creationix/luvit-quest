@@ -5,6 +5,7 @@ return function (req, res)
   res.body = res.body
     :gsub("%%HOST", req.socket:getsockname().ip)
     :gsub("%%PORT", req.socket:getsockname().port)
+    :gsub("%%PLAYER", req.cookies.player)
     :gsub("%%HASH", res.keygen(name))
     :gsub("%%NAME", name)
     :gsub("<!%-%-fields%-%->", [[
