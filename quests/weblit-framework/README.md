@@ -28,6 +28,8 @@ lit install creationix/weblit
 Use the following to get started. Save it as `weblit-server.lua`.
 
 ```lua
+local jsonStringify = require('json').stringify
+
 local function on_hello(req, res)
  -- req.method
  -- req.path
