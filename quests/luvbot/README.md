@@ -1,7 +1,6 @@
 LuvBot
 
-## WPA2
+## Access Point
 ```
 SSID: luvbot
-KEY: luvitluvit
 ```
