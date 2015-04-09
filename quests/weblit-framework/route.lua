@@ -8,7 +8,6 @@ return function (app)
     method = "POST",
     path = "/weblit-framework/test"
   }, function (req, res)
-    if not req.validate("weblit-framework") then return end
     local config = queryParse(req.body)
     local url = string.format("http://%s:%s/hello",
       config.host,
@@ -22,7 +21,7 @@ return function (app)
       error("NOT JSON IN RESPONSE")
     end
     if head.code == 200 and data.message:lower() == "hello world" then
-      return res.teleport("welcome")
+      return res.teleport("bonus")
     end
     error("Invalid response data")
   end)
