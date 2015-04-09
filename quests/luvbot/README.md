@@ -3,5 +3,5 @@ LuvBot
 ## WPA2
 ```
 SSID: luvbot
-KEY: luvit
+KEY: luvitluvit
 ```
