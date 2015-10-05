@@ -59,7 +59,7 @@ to grade their submission.  If it passes, they will get an unlock code to the ne
 -----
 
 welcome - install luvit and click link (no test)
-tcp-server - TCP Server (Echo server) coro-tcp and node-style
+tcp-server - TCP Server (Echo server) coro-net and node-style
 tcp-client - TCP Client (HTTP primitive client) coro + node
 http-server - HTTP Server (JSON response with content-type header and method/pathname)
 http-client - HTTP Client (PUT JSON with magic key)

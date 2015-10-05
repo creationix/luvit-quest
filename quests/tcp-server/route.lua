@@ -1,5 +1,5 @@
 local queryParse = require('querystring').parse
-local tcp = require('coro-tcp')
+local tcp = require('coro-net')
 return function (app)
   app.route({
     method = "POST",
@@ -7,7 +7,7 @@ return function (app)
   }, function (req, res)
     if not req.validate("tcp-server") then return end
     local config = queryParse(req.body)
-    local read, write = tcp.connect(config.host, config.port)
+    local read, write = tcp.connect(config)
     if not read then error(write) end
     local signal = 'guybrush threepwood'
     write(signal)

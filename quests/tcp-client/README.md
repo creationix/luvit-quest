@@ -8,25 +8,26 @@ make your request to, the following values will be useful:
 local config = {
   host = "%HOST",
   port = %PORT,
+  hash = "%HASH",
 }
 ```
 
 ## Coroutine Style
 
-Again, we'll need coro-tcp if you don't have it installed already.
+Again, we'll need coro-net if you don't have it installed already.
 
 ```sh
-lit install creationix/coro-tcp
+lit install creationix/coro-net
 ```
 
 Then create your `tcp-client.lua` file using the following as a starting point.
 
 ```lua
-local connect = require('coro-tcp').connect
+local connect = require('coro-net').connect
 
 coroutine.wrap(function ()
-  local line = "GET /%NAME/%HASH HTTP/1.0\r\n\r\n"
-  local read, write = connect("%HOST", %PORT)
+  local line = "GET /%NAME/" .. config.hash .. " HTTP/1.0\r\n\r\n"
+  local read, write = connect(config) -- config defined above.
   -- Insert code here
 end)()
 ```

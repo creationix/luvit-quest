@@ -1,6 +1,11 @@
-local createServer = require('coro-tcp').createServer
+local createServer = require('coro-net').createServer
 
-createServer("0.0.0.0", 3000, function (read, write)
+local config = {
+  host = "0.0.0.0",
+  port = 3000,
+}
+
+createServer(config, function (read, write)
   -- Echo back all input as output
   for data in read do
     write(data)

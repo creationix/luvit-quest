@@ -12,15 +12,20 @@ For Coroutine style, we need a library not included with luvit core.  Let's
 install that using `lit`.
 
 ```sh
-lit install creationix/coro-tcp
+lit install creationix/coro-net
 ```
 
 Then create your `tcp-server.lua` file using the following as a starting point.
 
 ```lua
-local createServer = require('coro-tcp').createServer
+local createServer = require('coro-net').createServer
 
-createServer("0.0.0.0", 3000, function (read, write)
+local config = {
+  host = "0.0.0.0",
+  port = 3000,
+}
+
+createServer(config, function (read, write)
   -- Insert code here
 end)
 ```
@@ -62,4 +67,3 @@ luvit tcp-server.lua
 You can test this locally using telnet or netcat to localhost port 3000.
 
 Enter your port and ip below to test and move to the next challenge.
-
