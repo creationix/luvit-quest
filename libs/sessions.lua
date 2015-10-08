@@ -1,7 +1,7 @@
 local digest = require('openssl').digest.digest
 
 local races = { "Dragonborn", "Dwarf", "Eladrin", "Elf", "High Elf", "Gnome",
-  "Rock Gnome", "Half-elf", "Half-orc", "Halfling", "Human", "Tiefling" }
+  "Rock Gnome", "Half-elf", "Half-orc", "Halfling", "Human", "Thiefling" }
 
 local alignments = { "Lawful Good", "Neutral Good", "Chaotic Good",
   "Lawful Neutral", "True Neutral", "Chaotic Neutral", "Lawful Evil",
